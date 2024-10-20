@@ -1,0 +1,25 @@
+.track {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 200px;
+  cursor: pointer;
+  transition: 300ms;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+  &Image {
+    width: 200px;
+  }
+
+  &Name {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  &Band {
+    color: #a5c0ff;
+    font-weight: 200;
+  }
+}
