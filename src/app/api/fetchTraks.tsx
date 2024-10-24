@@ -56,15 +56,25 @@ interface Image {
   width: number; // Ширина изображения
 }
 
-export async function fetchTraks(token: string): Promise<Track[]> {
-  const result = await fetch(
-    "https://api.spotify.com/v1/tracks?ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M",
-    {
-      method: "GET",
-      headers: { Authorization: `Bearer ${token}` },
-    }
-  );
+export async function fetchTracks(token: string): Promise<Track[]> {
+  try {
+    const result = await fetch(
+      "https://api.spotify.com/v1/tracks?ids=4iV5W9uYEdYUVa79Axb7Rh,1301WleyT98MSxVHPZCA6M",
+      {
+        method: "GET",
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    );
 
-  const data = await result.json();
-  return data.tracks || [];
+    if (!result.ok) {
+      const errorData = await result.json();
+      throw new Error(`Error ${result.status}: ${errorData.error.message}`);
+    }
+
+    const data = await result.json();
+    return data.tracks || [];
+  } catch (error) {
+    console.error("Error fetching tracks:", error);
+    throw error;
+  }
 }

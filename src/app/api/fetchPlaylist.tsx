@@ -63,26 +63,31 @@ export async function fetchPlaylist(
   const url = new URL(`https://api.spotify.com/v1/playlists/${playlistId}`);
 
   const market = "BY";
-
   const additionalTypes = "track";
 
   url.searchParams.append("market", market);
-
   url.searchParams.append("additional_types", additionalTypes);
 
-  const response = await fetch(url.toString(), {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-      "Content-Type": "application/json",
-    },
-  });
+  try {
+    const response = await fetch(url.toString(), {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
+      },
+    });
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch playlist: ${response.statusText}`);
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `Failed to fetch playlist: ${response.status} - ${errorData.error.message}`
+      );
+    }
+
+    const data: Playlist = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching playlist:", error);
+    throw error;
   }
-
-  const data: Playlist = await response.json();
-
-  return data;
 }

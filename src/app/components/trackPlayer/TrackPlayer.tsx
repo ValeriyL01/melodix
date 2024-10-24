@@ -3,7 +3,7 @@ import { useTrackStore } from "../../../stores/useTrackIdStore";
 
 export const TrackPlayer: React.FC = () => {
   const trackId = useTrackStore((state) => state.trackId);
-  console.log(trackId);
+
   return (
     <iframe
       title="Spotify Track Player"

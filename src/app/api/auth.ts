@@ -1,4 +1,4 @@
-export const clientId = "60f36d51f7ea41bcaebbc2d072d2571f";
+export const clientId = import.meta.env.VITE_CLIENT_ID;
 
 export async function redirectToAuthCodeFlow(clientId: string) {
   const verifier = generateCodeVerifier(128);
@@ -56,12 +56,13 @@ export async function getAccessToken(
     body: params,
   });
 
-  const { access_token, expires_in } = await result.json();
-  console.log("токен и др: ", result);
-  if (access_token) {
+  const { access_token, expires_in, refresh_token } = await result.json();
+
+  if (access_token && expires_in && refresh_token) {
     localStorage.setItem("access_token", access_token);
     const expirationTime = Date.now() + expires_in * 1000;
     localStorage.setItem("token_expiration", expirationTime.toString());
+    localStorage.setItem("refresh_token", refresh_token);
   }
 
   return access_token;
@@ -71,13 +72,12 @@ export const checkAndRefreshToken = async () => {
   const token = localStorage.getItem("access_token");
 
   if (tokenExpiration && Date.now() >= Number(tokenExpiration)) {
-    await getRefreshToken();
+    await getRefreshToken(clientId);
   }
 
   return token;
 };
-export const getRefreshToken = async () => {
-  // refresh token that has been previously stored
+export const getRefreshToken = async (clientId: string) => {
   const refreshToken = localStorage.getItem("refresh_token");
   const url = "https://accounts.spotify.com/api/token";
 
@@ -95,13 +95,12 @@ export const getRefreshToken = async () => {
   const body = await fetch(url, payload);
   const response = await body.json();
 
-  localStorage.setItem("access_token", response.access_token);
-  if (response.refresh_token) {
+  if (response.refresh_token && response.access_token && response.expires_in) {
+    localStorage.setItem("access_token", response.access_token);
     localStorage.setItem("refresh_token", response.refresh_token);
+    const expirationTime = Date.now() + response.expires_in * 1000;
+    localStorage.setItem("token_expiration", expirationTime.toString());
   }
-
-  const expirationTime = Date.now() + response.expires_in * 1000;
-  localStorage.setItem("token_expiration", expirationTime.toString());
 };
 
 export function getAccessTokenFromStorage(): string | null {

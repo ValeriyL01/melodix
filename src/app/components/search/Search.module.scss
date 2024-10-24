@@ -6,60 +6,11 @@
   flex-direction: column;
   align-items: center;
 
-  .playlistTitle {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
-  }
-
-  .searchContainer {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
   .searchInput {
     padding: 8px;
     font-size: 1rem;
     width: 300px;
     border: 1px solid #ccc;
     border-radius: 4px;
-  }
-  .playlistContainer {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-
-    .playlistItem {
-      width: 200px;
-      text-align: center;
-      padding: 10px;
-      transition: transform 0.2s;
-      cursor: pointer;
-      &:hover {
-        transform: scale(1.05);
-      }
-
-      .playlistImage {
-        width: 100%;
-        height: auto;
-        margin-bottom: 10px;
-      }
-
-      .playlistInfo {
-        .playlistName {
-          font-size: 1.2rem;
-          font-weight: bold;
-        }
-
-        .playlistOwner {
-          color: #888;
-          font-size: 0.9rem;
-        }
-
-        .playlistTotalTracks {
-          font-size: 0.9rem;
-        }
-      }
-    }
   }
 }
