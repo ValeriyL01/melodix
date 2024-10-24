@@ -1,6 +1,6 @@
-import { useState } from "react";
 import styles from "./track.module.scss";
-import { TrackPlayer } from "../TrackPlayer";
+
+import { useTrackStore } from "../../../stores/useTrackIdStore";
 
 interface TrackProps {
   id: string;
@@ -15,13 +15,16 @@ const Track: React.FC<TrackProps> = ({
   artistName,
   albumImageUrl,
 }) => {
-  const [selectedTrackId, setSelectedTrackId] = useState<string | null>(null);
+  const addTrackId = useTrackStore((state) => state.addTrackId);
+
+  const handleTrackClick = () => {
+    addTrackId(id);
+  };
   return (
-    <div onClick={() => setSelectedTrackId(id)} className={styles.track}>
+    <div onClick={handleTrackClick} className={styles.track}>
       <img className={styles.trackImage} src={albumImageUrl} alt={trackName} />
       <p className={styles.trackName}>{trackName}</p>
       <p className={styles.trackBand}>{artistName}</p>
-      {selectedTrackId && <TrackPlayer trackId={selectedTrackId} />}
     </div>
   );
 };

@@ -1,0 +1,89 @@
+.playlists {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-width: 800px;
+  border: 1px solid white;
+  padding: 20px;
+  border-radius: 5px;
+  max-height: 80vh;
+
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+  &Title {
+    font-size: 2.5rem;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgb(234, 240, 255, 0.3);
+    border-radius: 4px;
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: inherit;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(151, 151, 151, 0.3);
+    cursor: pointer;
+  }
+  .playlistsContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    padding: 20px;
+
+    .playlistItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 300px;
+      cursor: pointer;
+      transition: 300ms;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+
+      .playlistImage {
+        width: 300px;
+        height: 300px;
+      }
+
+      .playlistInfo {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        .playlistName {
+          font-size: 1.2rem;
+          text-align: center;
+        }
+
+        .playlistOwner {
+          color: #a5c0ff;
+          font-size: 0.9rem;
+        }
+
+        .playlistTotalTracks {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+.loaderContainer {
+  display: flex;
+  justify-content: center; /* Центрирование по горизонтали */
+  align-items: center; /* Центрирование по вертикали */
+  height: 100vh; /* Высота родительского контейнера равна высоте экрана */
+}

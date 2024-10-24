@@ -1,34 +1,42 @@
 import styles from "./Playlist.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { getAccessTokenFromStorage } from "../../api/auth";
-
 import { useEffect } from "react";
-
-import Track from "../track/track";
+import { useParams } from "react-router-dom";
 import { fetchPlaylist } from "../../api/fetchPlaylist";
+import Track from "../../components/track/Track";
 
+import Loading from "../../components/loading/Loading";
 const Playlist: React.FC = () => {
   const token = getAccessTokenFromStorage();
-  const id = "3wm6WBu58NZN1dlH9lnBsa";
+  const { id } = useParams();
+
   const { data: playlist, isLoading } = useQuery({
     queryKey: ["playlist", token, id],
-    queryFn: () => fetchPlaylist(token ?? "", id),
+    queryFn: () => fetchPlaylist(token ?? "", id ?? ""),
   });
 
   useEffect(() => {
-    console.log("playlist", Array.isArray(playlist));
     console.log("playlist", playlist);
-  }, []);
+  }, [playlist]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading></Loading>
+      </div>
+    );
   }
 
   return (
     <div className={styles.playlist}>
-      <h2 className={styles.playlistTitle}>Playlist</h2>
+      <h2 className={styles.playlistTitle}>Songs</h2>
       <div className={styles.playlistHeader}>
-        <img src={playlist?.images[1].url}></img>{" "}
+        <img
+          className={styles.playlistImage}
+          src={playlist?.images[0].url}
+          alt={playlist?.name}
+        />
         <div>
           <h3 className={styles.playlistName}>{playlist?.name}</h3>
           <p className={styles.playlistTotal}>{playlist?.tracks.total} songs</p>
