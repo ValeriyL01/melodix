@@ -79,6 +79,11 @@ export const checkAndRefreshToken = async () => {
 };
 export const getRefreshToken = async (clientId: string) => {
   const refreshToken = localStorage.getItem("refresh_token");
+
+  if (!refreshToken) {
+    throw new Error("Refresh token is not available.");
+  }
+
   const url = "https://accounts.spotify.com/api/token";
 
   const payload = {
@@ -92,6 +97,7 @@ export const getRefreshToken = async (clientId: string) => {
       client_id: clientId,
     }),
   };
+
   const body = await fetch(url, payload);
   const response = await body.json();
 

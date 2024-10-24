@@ -19,7 +19,7 @@ export const Playlists: React.FC = () => {
   const handlePlaylistClick = (playlistId: string) => {
     navigate(`/playlist/${playlistId}`);
   };
-  if (!query) {
+  if (!query || !playlists) {
     return null;
   }
   if (isLoading) {
