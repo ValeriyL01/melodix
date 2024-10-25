@@ -19,10 +19,10 @@ export const Playlists: React.FC = () => {
   const handlePlaylistClick = (playlistId: string) => {
     navigate(`/playlist/${playlistId}`);
   };
-  if (!query || !playlists) {
+  if (!query) {
     return null;
   }
-  if (isLoading) {
+  if (isLoading || !playlists) {
     return (
       <div className={styles.loaderContainer}>
         <Loading></Loading>

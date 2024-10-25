@@ -1,3 +1,14 @@
+.trackContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 10px;
+  &:hover {
+    background: rgba(128, 128, 128, 0.2);
+  }
+}
+
 .track {
   display: flex;
   align-items: center;
@@ -5,11 +16,7 @@
   flex-direction: column;
   width: 200px;
   cursor: pointer;
-  transition: 300ms;
 
-  &:hover {
-    transform: scale(1.05);
-  }
   &Image {
     width: 200px;
   }
@@ -21,5 +28,11 @@
   &Band {
     color: #a5c0ff;
     font-weight: 200;
+  }
+  &DownloadLink {
+    color: #eaf0ff;
+  }
+  &DownloadLink:hover {
+    text-decoration: underline;
   }
 }

@@ -47,6 +47,7 @@
       justify-content: center;
       flex-direction: column;
       width: 300px;
+
       cursor: pointer;
       transition: 300ms;
 
@@ -64,6 +65,7 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
+        height: 100px;
         .playlistName {
           font-size: 1.2rem;
           text-align: center;
@@ -83,7 +85,17 @@
 }
 .loaderContainer {
   display: flex;
-  justify-content: center; /* Центрирование по горизонтали */
-  align-items: center; /* Центрирование по вертикали */
-  height: 100vh; /* Высота родительского контейнера равна высоте экрана */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+@media (max-width: 768px) {
+  .playlistItem {
+    width: 250px;
+
+    .playlistImage {
+      width: 250px;
+      height: 250px;
+    }
+  }
 }

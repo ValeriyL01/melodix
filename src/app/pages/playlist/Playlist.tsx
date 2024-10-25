@@ -1,7 +1,6 @@
 import styles from "./Playlist.module.scss";
 import { useQuery } from "@tanstack/react-query";
 import { getAccessTokenFromStorage } from "../../api/auth";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPlaylist } from "../../api/fetchPlaylist";
 import Track from "../../components/track/Track";
@@ -15,10 +14,6 @@ const Playlist: React.FC = () => {
     queryKey: ["playlist", token, id],
     queryFn: () => fetchPlaylist(token ?? "", id ?? ""),
   });
-
-  useEffect(() => {
-    console.log("playlist", playlist);
-  }, [playlist]);
 
   if (isLoading) {
     return (

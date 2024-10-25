@@ -16,3 +16,10 @@
     gap: 30px;
   }
 }
+@media (max-width: 768px) {
+  .app {
+    &Container {
+      gap: 15px;
+    }
+  }
+}

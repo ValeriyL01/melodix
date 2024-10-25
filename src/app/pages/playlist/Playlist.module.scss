@@ -52,3 +52,42 @@
     cursor: pointer;
   }
 }
+@media (max-width: 768px) {
+  .playlist {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 800px;
+    border: 1px solid white;
+    padding: 20px;
+    border-radius: 5px;
+    max-height: 80vh;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    &Title {
+      font-size: 2rem;
+    }
+    &Image {
+      width: 300px;
+    }
+    &Header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+    &Name {
+      font-size: 2rem;
+    }
+    &Container {
+      display: flex;
+      justify-content: center;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 40px;
+      padding: 20px;
+    }
+  }
+}
