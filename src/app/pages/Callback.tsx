@@ -5,7 +5,10 @@ const Callback: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
-    navigate("/", { replace: true });
+    const token = localStorage.getItem("access_token");
+    if (token) {
+      navigate("/", { replace: true });
+    }
   }, [location, navigate]);
 
   return (
