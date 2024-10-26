@@ -1,18 +1,20 @@
+@import "../../styles/variables";
+
 .playlists {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: $gap-small;
   max-width: 800px;
-  border: 1px solid white;
+  border: 1px solid $primary-color;
   padding: 20px;
-  border-radius: 5px;
+  border-radius: $border-radius;
   max-height: 80vh;
 
   overflow-x: hidden;
   overflow-y: scroll;
 
   &Title {
-    font-size: 2.5rem;
+    font-size: $font-size-title;
   }
   &::-webkit-scrollbar {
     width: 10px;
@@ -38,7 +40,7 @@
     justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: $gap-large;
     padding: 20px;
 
     .playlistItem {
@@ -67,12 +69,12 @@
         flex-direction: column;
         height: 100px;
         .playlistName {
-          font-size: 1.2rem;
+          font-size: $font-size-subtitle;
           text-align: center;
         }
 
         .playlistOwner {
-          color: #a5c0ff;
+          color: $secondary-color;
           font-size: 0.9rem;
         }
 
@@ -87,7 +89,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 80vh;
 }
 @media (max-width: 768px) {
   .playlistItem {

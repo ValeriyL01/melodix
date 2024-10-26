@@ -1,5 +1,6 @@
+@import "../../styles/variables";
 .player {
-  background-color: #eaf0ff;
+  background-color: $primary-color;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);

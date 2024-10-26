@@ -71,7 +71,10 @@ export const checkAndRefreshToken = async () => {
   const tokenExpiration = localStorage.getItem("token_expiration");
   const token = localStorage.getItem("access_token");
 
-  if (tokenExpiration && Date.now() >= Number(tokenExpiration)) {
+  if (
+    tokenExpiration &&
+    Date.now() >= Number(tokenExpiration) + 59 * 60 * 1000
+  ) {
     await getRefreshToken(clientId);
   }
 
